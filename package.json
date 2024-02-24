@@ -1,0 +1,14 @@
+{
+  "name": "naf-tonejs",
+  "version": "1.0.0",
+  "description": "My first multi-user virtual reality",
+  "scripts": {
+      "start": "node ./server/easyrtc-server.js"
+  },
+  "author": "Alberto_Boem",
+  "dependencies": {
+      "debugout.js": "^1.1.0",
+      "networked-aframe": "^0.10.0"
+  }
+}
+
