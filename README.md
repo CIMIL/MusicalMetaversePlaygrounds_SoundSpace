@@ -1,6 +1,6 @@
-# MusicalMetaversePlaygrounds_SynthLand
+# Musical Metaverse Playgrounds Sound-Space
 
-This is an implementation of the Second Playground (aka "Sound Space") from the [Musical Metaverse Playgrounds](https://github.com/CIMIL/MusicalMetaversePlaygrounds "MM Playgrounds").
+This is an implementation of the Second Playground (aka "Sound-Space") from the [Musical Metaverse Playgrounds](https://github.com/CIMIL/MusicalMetaversePlaygrounds "MM Playgrounds").
 
 __________________________________________________________________________________________________________________________________________
 
