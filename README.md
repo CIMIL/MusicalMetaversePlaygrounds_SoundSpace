@@ -4,7 +4,7 @@ This is an implementation of the Second Playground (aka "Sound-Space") from the 
 
 __________________________________________________________________________________________________________________________________________
 
-<h2>How to use</h2>
+<h2>How to:</h2>
 
 * Clone the repository
 
