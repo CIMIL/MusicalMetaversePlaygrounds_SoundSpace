@@ -6,8 +6,9 @@
   <meta name="description"
     content="Networked-Aframe + Essentia js + Tone js">
 
+  
   <!-- Aframe -->
-  <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
+  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.5.0/socket.io.slim.js"></script>
   <script src="/easyrtc/easyrtc.js"></script>
   <script src="https://unpkg.com/networked-aframe@^0.11.0/dist/networked-aframe.min.js"></script>
@@ -106,11 +107,16 @@
       room: persistent-peer-to-peer; 
       debug: true;
       adapter: easyrtc;
-      audio: true;">
+      audio: true;"
+      fog="type: linear; color: #0b3c8a; density: 5.5">
   
   <a-assets>
-      <img id="groundTexture"
+    <audio id="pad" src="./assets/audio/nautilus-pad.wav"></audio>
+      <!--<img id="groundTexture"
         src="https://cdn.aframe.io/a-painter/images/floor.jpg"
+        crossorigin="anonymous" />-->
+        <img id="groundTexture"
+        src="./img/rock.jpg"
         crossorigin="anonymous" />
       <img id="hudTexture"
         src="./assets/textHUD.png"/>
@@ -119,6 +125,10 @@
         crossorigin="anonymous" />
 
       <img id="score-image" src="./assets/score.jpg">
+
+      
+      <img id="stars" src="./img/water.jpg">
+     
      
       <a-asset-item id="left-hand-model" src="./assets/Hands/leftHandHigh.glb"></a-asset-item>
       <a-asset-item id="right-hand-model" src="./assets/Hands/rightHandHigh.glb"></a-asset-item>
@@ -184,20 +194,27 @@
 
       <!--Mouth-->
       <template id="mouth-template">
-        <a-entity class="mouth">
-          <a-box class="upLip"
+        <a-entity class="mouth" id = "mouthit">
+          
+          <a-box class="upLip" id = "up"
             material="shader: standard"
-            scale="0.2 0.05 0.1"></a-box>
-          <a-box class="downLip"
+            position="0 -0.1 -0.35"
+            scale="0.2 0.05 0.1"
+            mouth-lips="type:sup"></a-box>
+
+          <a-box class="downLip" id = "down"
             material="shader: standard"
-            scale="0.2 0.05 0.1"></a-box>
+            position="0 -0.22 -0.35"
+            scale="0.2 0.05 0.1"
+            mouth-lips="type:inf"></a-box>
+          
         </a-entity>
       </template>
 
       <!--Block-->
       <template id="voxel">
         <a-entity class="box"
-          geometry="primitive: box; height: 0.5; width: 0.5; depth: 0.5"
+          geometry="primitive: box; height: 0.5; width: 1.5; depth: 1.5"
           material="shader: standard"
           random-color
           bar-volume-diff >
@@ -216,24 +233,194 @@
     </a-assets>
 
     <!-- Environment -->
+    <!--
     <a-cylinder id="ground"
       src="#groundTexture"
       radius="52"
       height="0.1" collider-check class="doo">
     </a-cylinder>
-
+  
     <a-sky src="#skyTexture"
       theta-length="90"
       radius="50"></a-sky>
+    -->
 
-    <a-entity light="color: #ffffff; intensity: 1.5; type: ambient;"
+    <a-cylinder id="ground"
+      src="#groundTexture"
+      position="40 20 60"
+      radius="5"
+      height="1.05" collider-check class="doo">
+    </a-cylinder>
+
+    <a-cylinder id="ground"
+      src="#groundTexture"
+      position="30 60 40"
+      radius="5"
+      height="0.15" collider-check class="doo">
+    </a-cylinder>
+
+    <a-cylinder id="ground"
+      src="#groundTexture"
+      position="50 -90 70"
+      radius="5"
+      height="1.05" collider-check class="doo">
+    </a-cylinder>
+
+    <a-cylinder id="ground"
+      src="#groundTexture"
+      position="35 60 90"
+      radius="5"
+      height="3.1" collider-check class="doo">
+    </a-cylinder>
+
+    <a-cylinder id="ground"
+      src="#groundTexture"
+      position="65 -75 110"
+      radius="5"
+      height="2.05" collider-check class="doo">
+    </a-cylinder>
+
+    <a-cylinder id="ground"
+      src="#groundTexture"
+      position="15 15 140"
+      radius="5"
+      height="0.5" collider-check class="doo">
+    </a-cylinder>
+
+    <a-cylinder id="ground"
+      src="#groundTexture"
+      position="75 -45 160"
+      radius="5"
+      height="1.05" collider-check class="doo">
+    </a-cylinder>
+
+    <!------>
+
+    <a-cylinder id="ground"
+      src="#groundTexture"
+      position="25 10 -140"
+      radius="5"
+      height="2.15" collider-check class="doo">
+    </a-cylinder>
+
+    <a-cylinder id="ground"
+      src="#groundTexture"
+      position="30 -30 -45"
+      radius="5"
+      height="0.5" collider-check class="doo">
+    </a-cylinder>
+
+    <a-cylinder id="ground"
+      src="#groundTexture"
+      position="15 45 -60"
+      radius="5"
+      height="2.15" collider-check class="doo">
+    </a-cylinder>
+
+    <a-cylinder id="ground"
+      src="#groundTexture"
+      position="60 -10 -80"
+      radius="5"
+      height="1.05" collider-check class="doo">
+    </a-cylinder>
+
+    <a-cylinder id="ground"
+      src="#groundTexture"
+      position="20 45 -100"
+      radius="5"
+      height="0.55" collider-check class="doo">
+    </a-cylinder>
+
+    <!------>
+
+    <!------>
+
+    <a-cylinder id="ground"
+      src="#groundTexture"
+      position="-25 -75 -140"
+      radius="5"
+      height="2.05" collider-check class="doo">
+    </a-cylinder>
+
+    <a-cylinder id="ground"
+      src="#groundTexture"
+      position="-30 0 -45"
+      radius="5"
+      height="0.5" collider-check class="doo">
+    </a-cylinder>
+
+    <a-cylinder id="ground"
+      src="#groundTexture"
+      position="-15 65 -60"
+      radius="5"
+      height="1.1" collider-check class="doo">
+    </a-cylinder>
+
+    <a-cylinder id="ground"
+      src="#groundTexture"
+      position="-60 -50 -80"
+      radius="5"
+      height="0.5" collider-check class="doo">
+    </a-cylinder>
+
+    <a-cylinder id="ground"
+      src="#groundTexture"
+      position="-20 10 -100"
+      radius="5"
+      height="0.15" collider-check class="doo">
+    </a-cylinder>
+
+    <!------>
+
+    <a-cylinder id="ground"
+      src="#groundTexture"
+      position="-155 -25 -40"
+      radius="5"
+      height="2.15" collider-check class="doo">
+    </a-cylinder>
+
+    <a-cylinder id="ground"
+      src="#groundTexture"
+      position="120 -30 45"
+      radius="5"
+      height="0.05" collider-check class="doo">
+    </a-cylinder>
+
+    <a-cylinder id="ground"
+      src="#groundTexture"
+      position="150 65 -45"
+      radius="5"
+      height="1.5" collider-check class="doo">
+    </a-cylinder>
+
+    <a-cylinder id="ground"
+      src="#groundTexture"
+      position="-120 -20 -10"
+      radius="5"
+      height="0.5" collider-check class="doo">
+    </a-cylinder>
+
+    <a-cylinder id="ground"
+      src="#groundTexture"
+      position="-100 100 -10"
+      radius="5"
+      height="0.05" collider-check class="doo">
+    </a-cylinder>
+
+    <!------>
+
+    <a-sky src="#stars" rotation="0 -90 0"></a-sky>
+
+    <a-entity id="cubes" cube-man></a-entity>
+
+    <a-entity light="color: #ffffff; intensity: 1.; type: ambient;"
       visible=""></a-entity>
-    <a-entity light="color: #ffffff; intensity: 0.5"
+    <a-entity light="color: #ffffff; intensity: 0.1"
       position="5 5 5"></a-entity>
     
     <a-entity 
       id="player1" 
-      movement-controls="speed:0.3;" 
+      movement-controls="fly: true; speed:0.5;" 
       tracked-vr-hands
       spawn-in-circle="radius:3" 
       networked="template:#camera-rig-template;attachTemplateToLocal:false;">
@@ -242,7 +429,8 @@
       id="player" 
       networked="template: #avatar-template; attachTemplateToLocal: false;" 
       camera position="0 1.6 0" 
-      position-listener> 
+      position-listener
+      look-controls> 
 
       <!--DUMMY RAYCAST-->
       <a-entity 
@@ -276,21 +464,26 @@
         </a-sphere>
       <a-entity 
         networked="template:#mouth-template;attachTemplateToLocal:false;">
+        <!--2-->
+        
         <a-box 
           class="upLip"
           position="0 -0.1 -0.35"
-          visible="false"
+          visible="true"
           mouth-lips="type:sup"></a-box>
+          
         <a-box 
           class="downLip"
           position="0 -0.22 -0.35"
-          visible="false"
+          visible="true"
           mouth-lips="type:inf"></a-box>
+        
         <a-entity id="huddisplay">
           <a-plane 
             scale="1. 1. 1"
-            position="1 -0.7 0">
-            <a-text value="CHORD:"
+            position="1 -0.7 0"
+            >
+            <a-text value="Pitch:"
                 scale=".25 .25 1"
                 position="-1.23 .39 -1"
                 color="black"
@@ -302,7 +495,7 @@
                 color="black"
                 rms>
             </a-text>
-            <a-plane material="side: double; color: #6eccc6; transparent: true; opacity: 0.3"
+            <a-plane material="side: double; color: #AAA; transparent: true; opacity: 0.3"
                 scale=".6 .3 .1"
                 position="-1 .3 -1.1"
                 rotation="-15 0 0">
@@ -318,31 +511,58 @@
 
       <!--Mouth-->
       <a-entity networked="template:#mouth-template;attachTemplateToLocal:false;">
+        <!--3-->
         
         <a-box class="upLip"
           position="0 -0.1 0.15"
           visible="false"
           mouth-lips="type:sup"></a-box>
+          
         <a-box class="downLip"
           position="0 -0.22 0.15"
           visible="false"
           mouth-lips="type:inf"></a-box>
+        
+          
       </a-entity>
 
       </a-entity>
     </a-entity>
 
-    <a-entity id="bars"
-      bars-waveform="num: 50"> </a-entity> <!--256, 128-->
+    <a-entity>
+      <!-- Add a sound component with positional audio -->
+      <a-sound src="#pad" autoplay="true" loop="true" position="0 0 0"></a-sound>
+    </a-entity>
 
+    <a-entity>
+    <a-sound src="#pad" autoplay="true" loop="true" position="10 0 10"></a-sound>
+    </a-entity>
+    <a-entity>
+    <a-sound src="#pad" autoplay="true" loop="true" position="-10 0 -10"></a-sound>
+  </a-entity>
+
+    <a-entity id="bars"
+      bars-waveform="num: 128"> </a-entity> <!--256, 128-->
+
+    <!--
     <a-box position="30 0 30" height="18" width="150" depth="2" material="color: #0a0a0a"></a-box>
     <a-box position="30 0 -30" height="18" width="150" depth="2" material="color: #0a0a0a"></a-box>
     <a-box position="40 0 0" rotation="0 90 0" height="18" width="150" depth="2" material="color: #0a0a0a"></a-box>
     <a-box position="-40 0 0" rotation="0 90 0" height="18" width="150" depth="2" material="color: #0a0a0a"></a-box>
+    -->
+
+
+    
+    
 
   </a-scene>
 
   <script>
+  
+  
+
+
+  
 
   //Tracked VR hands
      AFRAME.registerComponent('tracked-vr-hands', {
@@ -432,7 +652,12 @@
         },
       ]
     });
+
+
+    
   </script>
+
+  
 
   <!-- HUD -->
   <div class="actions">
