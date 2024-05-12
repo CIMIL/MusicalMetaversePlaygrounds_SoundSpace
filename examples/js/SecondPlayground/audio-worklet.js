@@ -35,7 +35,7 @@ function loop() {
 
   featureExtractorNode.port.onmessage = (e) => {
     chord = e.data;
-    sendTimeStamp('CHORD');
+    sendTimeStamp('Pitch');
   };
 
   //get tonejs rms and fft
@@ -145,6 +145,12 @@ function onConnect() {
     toneMic.connect(meter);
     toneMic.connect(fft);
     Tone.context.resume();
+    
+    var element = document.getElementById('mouthit');
+    if (element) {
+      element.remove();
+    }
+
 
     NAF.connection.subscribeToDataChannel("msg-delay", calculateDelay);
 
@@ -184,3 +190,4 @@ function sendTimeStamp(nameEvent){
   var creationTime = new Date().getTime();
   NAF.connection.broadcastDataGuaranteed("msg-delay", nameEvent + ':' + creationTime);
 }
+

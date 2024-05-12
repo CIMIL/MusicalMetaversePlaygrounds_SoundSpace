@@ -1,3 +1,5 @@
+//const { debug } = require("networked-aframe/src/options");
+
 
 AFRAME.registerComponent('bar-volume', {
   dependencies: ['size'],
@@ -6,7 +8,7 @@ AFRAME.registerComponent('bar-volume', {
   tick: function (time, deltaTime) {
     if (init) {
       volume = analyserDataArray[0];
-      if (volume > 0.1) this.el.object3D.scale.y = volume * 1000;
+      if (volume > 0.01) this.el.object3D.scale.y = volume * 10;//volume * 10000;
     }
   },
   events: {
@@ -27,11 +29,12 @@ AFRAME.registerComponent('bar-volume-diff', {
     if (init && NAF.utils.isMine(this.el)) {
        volume = analyserDataArray[0]; 
       if (volume > 0.0025) {
-        this.el.object3D.scale.y = toneRms * (Math.random()*500); 
+        this.el.object3D.scale.y = (toneRms*10)* (Math.random()*101.0); 
       }
       else if (this.el.object3D.scale.y > 1) {
         this.el.object3D.scale.y -= 0.1; 
       }
+      
     }
   },
 });
@@ -108,7 +111,7 @@ AFRAME.registerComponent('mouth-lips', {
         if (data.type == 'sup') {
           el.object3D.position.y = this.pos + volume;
           //sendTimeStamp('lip-up');
-        } else if (data.type == 'inf') {
+        } if (data.type == 'inf') {
           el.object3D.position.y = this.pos - volume;
           //sendTimeStamp('lip-down');
         }
@@ -122,7 +125,7 @@ AFRAME.registerComponent('mouth-lips', {
 // ----------------- HUD ----------------------
 AFRAME.registerComponent('chord', {
   tick: function (time, deltaTime) {
-    this.el.setAttribute('value', 'CHORD: ' + chord);
+    this.el.setAttribute('value', 'Pitch: ' + chord);
   },
 });
 
@@ -215,3 +218,4 @@ function sendTimeStamp(nameEvent){
   NAF.connection.broadcastDataGuaranteed("msg-delay", nameEvent + ':' + creationTime);
   
 }
+
